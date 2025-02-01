@@ -1,7 +1,11 @@
 export default function Home() {
   return (
     <>
-    <h1 className="text-2xl">Home</h1>
+    <section className="pink_container">
+      <h1 className="heading">Flex Your Projects,<br /> Fuel Your Growth</h1>
+      <p className="sub-heading !max-w-md">Showcase Your Projects, Connect with Innovators, and Grow Together</p>
+    </section>
+    
     </>
   );
 }
