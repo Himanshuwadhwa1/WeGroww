@@ -1,4 +1,4 @@
-import SearchForm from "../components/searchForm";
+import SearchForm from "../../components/searchForm";
 interface iQueryprops{
   searchParams: Promise<{ query?:string }>
 }

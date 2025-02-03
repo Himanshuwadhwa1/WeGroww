@@ -1,4 +1,5 @@
 "use client"
+import { X } from 'lucide-react';
 import Link from 'next/link';
 import * as React from 'react';
 
@@ -14,7 +15,9 @@ export function SearchFormReset ({query}: {query?:string}) {
         }
   return (
     <button type='reset' onClick={reset}>
-        <Link href={'/'} className='search-btn text-white'>X</Link>
+        <Link href={'/'} className='search-btn text-white'>
+          <X className='size-6'/>
+        </Link>
     </button>
   );
 }
