@@ -9,10 +9,10 @@ export interface INavbarProps {
 export async function Navbar (props: INavbarProps) {
     const session = await auth()
   return (
-    <header className='px-5 py-2 bg-white shadow-sm font-sans'>
+    <header className='px-5 py-2 bg-[#F5F5F5] shadow-sm font-sans'>
       <nav className='flex justify-between items-center'>
         <Link href={'/'}>
-            <Image src={'/logo.png'} alt='logo' width={144} height={30}/>
+            <Image src={'/logo.png'} alt='logo' width={144} height={30} style={{"mixBlendMode":'multiply'}}/>
         </Link>
         <div className='flex gap-5 items-center text-black'>
             {session && session?.user ? (

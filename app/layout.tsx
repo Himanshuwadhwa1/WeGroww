@@ -78,6 +78,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${workSans.variable}`}
+        style={{'backgroundColor' :'#F8E7F6'}}
       >
         {children}
       </body>

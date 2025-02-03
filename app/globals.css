@@ -48,7 +48,7 @@
     }
 
     .pink_container {
-        @apply w-full bg-primary min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6;
+        @apply w-full bg-[#DD88CF] min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6;
     }
 
     .tag {
@@ -56,7 +56,7 @@
     }
 
     .heading {
-        @apply uppercase bg-black px-6 py-3 font-work-sans font-extrabold text-white sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5;
+        @apply uppercase bg-[#4B164C] px-6 py-3 font-work-sans font-extrabold text-white sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5;
     }
 
     .sub-heading {
@@ -120,68 +120,68 @@
 
     /* searchform */
     .search-form {
-        @apply max-w-3xl w-full min-h-[80px] bg-white border-[5px] border-black rounded-[80px] text-[24px] mt-8 px-5 flex flex-row items-center gap-5;
+        @apply max-w-3xl w-full min-h-[80px] bg-[#F8E7F6] border-[5px] border-black rounded-[80px] text-[24px] mt-8 px-5 flex flex-row items-center gap-5;
     }
 
     .search-input {
-        @apply flex-1 font-bold placeholder:font-semibold placeholder:text-black-100 w-full h-auto outline-none;
+        @apply flex-1 font-bold placeholder:font-semibold placeholder:text-black-100 w-full h-auto outline-none bg-[#F8E7F6];
     }
 
     .search-btn {
         @apply size-[50px] rounded-full bg-black flex justify-center items-center !important;
     }
 
-    /* startupcard */
-    .startup-card {
+    /* Projectcard */
+    .project-card {
         @apply bg-white border-[5px] border-black py-6 px-5 rounded-[22px] shadow-200 hover:border-primary transition-all duration-500 hover:shadow-300 hover:bg-primary-100;
     }
 
-    .startup-card_date {
+    .project-card_date {
         @apply font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-full group-hover:bg-white-100;
     }
 
-    .startup-card_desc {
+    .project-card_desc {
         @apply font-normal text-[16px] line-clamp-2 my-3 text-black-100 break-all;
     }
 
-    .startup-card_img {
+    .project-card_img {
         @apply w-full h-[164px] rounded-[10px] object-cover;
     }
 
-    .startup-card_btn {
+    .project-card_btn {
         @apply rounded-full bg-black-200 font-medium text-[16px] text-white px-5 py-3 !important;
     }
 
-    .startup-card_skeleton {
+    .project-card_skeleton {
         @apply w-full h-96 rounded-[22px] bg-zinc-400;
     }
 
     /* startupform */
-    .startup-form {
+    .project-form {
         @apply max-w-2xl mx-auto bg-white my-10 space-y-8 px-6;
     }
 
-    .startup-form_label {
+    .project-form_label {
         @apply font-bold text-[18px] text-black uppercase;
     }
 
-    .startup-form_input {
+    .project-form_input {
         @apply border-[3px] border-black px-5 py-7 text-[18px] text-black font-semibold rounded-full mt-3 placeholder:text-black-300 !important;
     }
 
-    .startup-form_textarea {
+    .project-form_textarea {
         @apply border-[3px] border-black p-5 text-[18px] text-black font-semibold rounded-[20px] mt-3 placeholder:text-black-300 !important;
     }
 
-    .startup-form_error {
+    .project-form_error {
         @apply text-red-500 mt-2 ml-5;
     }
 
-    .startup-form_editor {
+    .project-form_editor {
         @apply mt-3 border-[3px] border-black text-[18px] text-black font-semibold placeholder:text-black-300 !important;
     }
 
-    .startup-form_btn {
+    .project-form_btn {
         @apply bg-primary border-[4px] border-black rounded-full p-5 min-h-[70px] w-full font-bold text-[18px] !important;
     }
 
@@ -202,8 +202,8 @@
         background-image: linear-gradient(
                 to right,
                 transparent 49.5%,
-                rgba(251, 232, 67, 0.2) 49.5%,
-                rgba(251, 232, 67, 0.6) 50.5%,
+                rgba(183, 67, 251, 0.2) 49.5%,
+                rgba(183, 67, 251, 0.6) 50.5%,
                 transparent 50.5%
         );
         background-size: 5% 100%;
