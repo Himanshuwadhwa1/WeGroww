@@ -231,11 +231,31 @@ export type PROJECT_QUERIESResult = Array<{
   category: null;
   image: null;
 }>;
+// Variable: PROJECT_BY_ID_QUERY
+// Query: *[_type == "project" && _id == $id]{  _id,   title,   slug,  _createdAt,  author -> {    _id, name, image, bio  },   views,  description,  category,  image,    pitch}
+export type PROJECT_BY_ID_QUERYResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  _createdAt: string;
+  author: {
+    _id: string;
+    name: string | null;
+    image: string | null;
+    bio: string | null;
+  } | null;
+  views: number | null;
+  description: string | null;
+  category: string | null;
+  image: string | null;
+  pitch: string | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"project\" && defined(slug.current) && !defined($search) || title match $search || category match $search || author->name match $search ] | order(_createdAt desc){\n  _id, \n  title, \n  slug,\n  _rev,\n  _type,\n  _updatedAt,\n  _createdAt,\n  author -> {\n    _id, name, image, bio\n  }, \n  views,\n  description,\n  category,\n  image,\n}": PROJECT_QUERIESResult;
+    "*[_type == \"project\" && _id == $id]{\n  _id, \n  title, \n  slug,\n  _createdAt,\n  author -> {\n    _id, name, image, bio\n  }, \n  views,\n  description,\n  category,\n  image,\n    pitch\n}": PROJECT_BY_ID_QUERYResult;
   }
 }
