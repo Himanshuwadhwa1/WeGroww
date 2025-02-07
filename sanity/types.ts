@@ -172,8 +172,21 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: sanity/lib/queries.ts
 // Variable: PROJECT_QUERIES
-// Query: *[_type == "project" && defined(slug.current)]{  _id,   title,   slug,  _rev,  _type,  _updatedAt,  _createdAt,  author -> {    _id, name, image, bio  },   views,  description,  category,  image,}
+// Query: *[_type == "project" && defined(slug.current) && !defined($search) || title match $search || category match $search || author->name match $search ] | order(_createdAt desc){  _id,   title,   slug,  _rev,  _type,  _updatedAt,  _createdAt,  author -> {    _id, name, image, bio  },   views,  description,  category,  image,}
 export type PROJECT_QUERIESResult = Array<{
+  _id: string;
+  title: null;
+  slug: null;
+  _rev: string;
+  _type: "author";
+  _updatedAt: string;
+  _createdAt: string;
+  author: null;
+  views: null;
+  description: null;
+  category: null;
+  image: string | null;
+} | {
   _id: string;
   title: string | null;
   slug: Slug | null;
@@ -191,12 +204,38 @@ export type PROJECT_QUERIESResult = Array<{
   description: string | null;
   category: string | null;
   image: string | null;
+} | {
+  _id: string;
+  title: string | null;
+  slug: null;
+  _rev: string;
+  _type: "sanity.fileAsset";
+  _updatedAt: string;
+  _createdAt: string;
+  author: null;
+  views: null;
+  description: string | null;
+  category: null;
+  image: null;
+} | {
+  _id: string;
+  title: string | null;
+  slug: null;
+  _rev: string;
+  _type: "sanity.imageAsset";
+  _updatedAt: string;
+  _createdAt: string;
+  author: null;
+  views: null;
+  description: string | null;
+  category: null;
+  image: null;
 }>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"project\" && defined(slug.current)]{\n  _id, \n  title, \n  slug,\n  _rev,\n  _type,\n  _updatedAt,\n  _createdAt,\n  author -> {\n    _id, name, image, bio\n  }, \n  views,\n  description,\n  category,\n  image,\n}": PROJECT_QUERIESResult;
+    "*[_type == \"project\" && defined(slug.current) && !defined($search) || title match $search || category match $search || author->name match $search ] | order(_createdAt desc){\n  _id, \n  title, \n  slug,\n  _rev,\n  _type,\n  _updatedAt,\n  _createdAt,\n  author -> {\n    _id, name, image, bio\n  }, \n  views,\n  description,\n  category,\n  image,\n}": PROJECT_QUERIESResult;
   }
 }

@@ -2,14 +2,15 @@ import { ProjectCard, ProjectTypeCard } from "@/components/ProjectCard";
 import SearchForm from "../../components/searchForm";
 import { client } from "@/sanity/lib/client";
 import { PROJECT_QUERIES } from "@/sanity/lib/queries";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 interface iQueryprops{
   searchParams: Promise<{ search?:string }>
 }
 
 export default async function Home({searchParams} : iQueryprops ) {
   const search = (await searchParams).search;
-  const posts  = await client.fetch(PROJECT_QUERIES);
-  console.log()
+  const params = {search : search || null}
+  const {data : posts} = await sanityFetch({query:PROJECT_QUERIES,params});
   return (
     <>
     <section className="pink_container">
@@ -32,6 +33,7 @@ export default async function Home({searchParams} : iQueryprops ) {
           )}
         </ul>
     </section>
+    <SanityLive />
     </>
   );
 }
