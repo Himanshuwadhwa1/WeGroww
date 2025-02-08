@@ -17,13 +17,13 @@ export const PROJECT_QUERIES = defineQuery(`*[_type == "project" && defined(slug
   image,
 }`)
 
-export const PROJECT_BY_ID_QUERY = defineQuery(`*[_type == "project" && _id == $id]{
+export const PROJECT_BY_ID_QUERY = defineQuery(`*[_type == "project" && _id == $id][0]{
   _id, 
   title, 
   slug,
   _createdAt,
   author -> {
-    _id, name, image, bio
+    _id, name, image, bio,username,email
   }, 
   views,
   description,
