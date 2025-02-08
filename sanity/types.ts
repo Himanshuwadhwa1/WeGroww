@@ -232,7 +232,7 @@ export type PROJECT_QUERIESResult = Array<{
   image: null;
 }>;
 // Variable: PROJECT_BY_ID_QUERY
-// Query: *[_type == "project" && _id == $id][0]{  _id,   title,   slug,  _createdAt,  author -> {    _id, name, image, bio,username  },   views,  description,  category,  image,    pitch}
+// Query: *[_type == "project" && _id == $id][0]{  _id,   title,   slug,  _createdAt,  author -> {    _id, name, image, bio,username,email  },   views,  description,  category,  image,    pitch}
 export type PROJECT_BY_ID_QUERYResult = {
   _id: string;
   title: string | null;
@@ -244,6 +244,7 @@ export type PROJECT_BY_ID_QUERYResult = {
     image: string | null;
     bio: string | null;
     username: string | null;
+    email: string | null;
   } | null;
   views: number | null;
   description: string | null;
@@ -251,12 +252,31 @@ export type PROJECT_BY_ID_QUERYResult = {
   image: string | null;
   pitch: string | null;
 } | null;
+// Variable: VIEWS_BY_ID
+// Query: *[_type == "project" && _id == $id][0]{  _id,views}
+export type VIEWS_BY_IDResult = {
+  _id: string;
+  views: number | null;
+} | null;
+// Variable: AUTHOR_BY_GITHUB_ID
+// Query: *[_type == "author" && id == $id][0]{    _id,    id,    name,    username,    email,    image,    bio  }
+export type AUTHOR_BY_GITHUB_IDResult = {
+  _id: string;
+  id: number | null;
+  name: string | null;
+  username: string | null;
+  email: string | null;
+  image: string | null;
+  bio: string | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"project\" && defined(slug.current) && !defined($search) || title match $search || category match $search || author->name match $search ] | order(_createdAt desc){\n  _id, \n  title, \n  slug,\n  _rev,\n  _type,\n  _updatedAt,\n  _createdAt,\n  author -> {\n    _id, name, image, bio\n  }, \n  views,\n  description,\n  category,\n  image,\n}": PROJECT_QUERIESResult;
-    "*[_type == \"project\" && _id == $id][0]{\n  _id, \n  title, \n  slug,\n  _createdAt,\n  author -> {\n    _id, name, image, bio,username\n  }, \n  views,\n  description,\n  category,\n  image,\n    pitch\n}": PROJECT_BY_ID_QUERYResult;
+    "*[_type == \"project\" && _id == $id][0]{\n  _id, \n  title, \n  slug,\n  _createdAt,\n  author -> {\n    _id, name, image, bio,username,email\n  }, \n  views,\n  description,\n  category,\n  image,\n    pitch\n}": PROJECT_BY_ID_QUERYResult;
+    "*[_type == \"project\" && _id == $id][0]{\n  _id,views\n}": VIEWS_BY_IDResult;
+    "\n  *[_type == \"author\" && id == $id][0]{\n    _id,\n    id,\n    name,\n    username,\n    email,\n    image,\n    bio\n  }\n  ": AUTHOR_BY_GITHUB_IDResult;
   }
 }
