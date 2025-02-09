@@ -158,19 +158,19 @@
 
     /* project form */
     .project-form {
-        @apply max-w-2xl mx-auto bg-white my-10 space-y-8 px-6;
+        @apply max-w-2xl mx-auto bg-[#F8E7F6] my-10 space-y-8 px-6;
     }
 
     .project-form_label {
-        @apply font-bold text-[18px] text-black uppercase;
+        @apply font-bold text-[18px] text-black uppercase ;
     }
 
     .project-form_input {
-        @apply border-[3px] border-black px-5 py-7 text-[18px] text-black font-semibold rounded-full mt-3 placeholder:text-black-300 !important;
+        @apply border-[3px] bg-[#F5F5F5] border-black px-5 py-7 text-[18px] text-black font-semibold rounded-full mt-3 placeholder:text-black-300 !important;
     }
 
     .project-form_textarea {
-        @apply border-[3px] border-black p-5 text-[18px] text-black font-semibold rounded-[20px] mt-3 placeholder:text-black-300 !important;
+        @apply border-[3px] bg-[#F5F5F5] border-black p-5 text-[18px] text-black font-semibold rounded-[20px] mt-3 placeholder:text-black-300 !important;
     }
 
     .project-form_error {

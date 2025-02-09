@@ -17,7 +17,7 @@ export async function Navbar (props: INavbarProps) {
         <div className='flex gap-5 items-center text-black'>
             {session && session?.user ? (
                 <>
-                    <Link href='/projects/create'>
+                    <Link href='/create'>
                         <span>Create</span>
                     </Link>
                     <form action={async()=>{
