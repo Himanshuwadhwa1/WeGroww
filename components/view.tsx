@@ -20,7 +20,7 @@ export  async function View ({id}: IViewProps) {
             <Ping />
         </div>
         <p className='view-text'>
-            <span className='font-black'>Views: {totalViews}</span>
+            <span className='font-black'>Views: {totalViews? totalViews:0}</span>
         </p>
     </div>
   );

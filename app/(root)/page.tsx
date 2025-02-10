@@ -12,7 +12,6 @@ export default async function Home({searchParams} : iQueryprops ) {
   const params = {search : search || null}
   
   const session = await auth();
-  console.log(session?.id);
 
   const {data : posts} = await sanityFetch({query:PROJECT_QUERIES,params});
   

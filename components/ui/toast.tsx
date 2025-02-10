@@ -48,7 +48,7 @@ const Toast = React.forwardRef<
   return (
     <ToastPrimitives.Root
       ref={ref}
-      className={cn(toastVariants({ variant }), className,"bg-red-600 text-white")}
+      className={cn(toastVariants({ variant }), className)}
       {...props}
     />
   )

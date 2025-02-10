@@ -11,6 +11,7 @@ import { schemaValidation } from '@/lib/validation';
 import { z } from 'zod';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
+import { createProject } from '@/lib/action';
 
 export interface IProjectFormProps {
 }
@@ -18,7 +19,7 @@ export interface IProjectFormProps {
 export default function ProjectForm (props: IProjectFormProps) {
   const [errors,setErrors] = useState<Record<string,string>>({});
   const [pitch, setPitch] = useState("**I am empty, `Fill me Up!!!`**");
-  const {toast} = useToast();
+  const { toast } = useToast();
   const router = useRouter();
 
   const handleSubmitForm =async(prevState:any,formData : FormData)=>{
@@ -31,16 +32,18 @@ export default function ProjectForm (props: IProjectFormProps) {
         pitch,
       }
       await schemaValidation.parseAsync(formValues);
-      console.log(formValues);
-      // const result = createProject(prevState,formData,pitch);
-      // if(result.status == "SUCCESS"){
-      //   toast({
-      //     title:'Sucess',
-      //     description:'Your Project has been created successfully'
-      //   });
-      // }
-      // router.push(`project/${result.id}`);
-      // return result;
+      const result = await createProject(prevState,formData,pitch);
+      console.log(result);
+      if(result.status == "SUCCESS"){
+        toast({
+          title:'Sucess',
+          description:'Your Project has been created successfully',
+          variant:'default',
+          className:'bg-secondary text-black'
+        });
+      }
+      router.push(`project/${result._id}`);
+      return result;
       
     } catch (error) {
       console.log(error);
@@ -50,7 +53,8 @@ export default function ProjectForm (props: IProjectFormProps) {
         toast({
           title: "Error",
           description: "Please check your inputs and try again",
-          variant: "destructive",
+          variant:"destructive",
+          className:"bg-primary text-white rounded-lg"
         });
         return {...prevState,error:"Validation Failed",status:"ERROR"}
       }
@@ -58,6 +62,7 @@ export default function ProjectForm (props: IProjectFormProps) {
         title: "Error",
         description: "An unexpected error has occurred",
         variant: "destructive",
+        className:"bg-primary text-white rounded-lg"
       });
       return {...prevState,
         error:"Unexpected error has occured",

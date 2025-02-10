@@ -33,7 +33,8 @@ export const PROJECT_BY_ID_QUERY = defineQuery(`*[_type == "project" && _id == $
 }`)
 
 export const VIEWS_BY_ID = defineQuery(`*[_type == "project" && _id == $id][0]{
-  _id,views
+  _id,
+  views
 }`)
 
 export const AUTHOR_BY_GITHUB_ID = defineQuery(`
