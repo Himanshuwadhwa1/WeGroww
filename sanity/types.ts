@@ -253,7 +253,7 @@ export type PROJECT_BY_ID_QUERYResult = {
   pitch: string | null;
 } | null;
 // Variable: VIEWS_BY_ID
-// Query: *[_type == "project" && _id == $id][0]{  _id,views}
+// Query: *[_type == "project" && _id == $id][0]{  _id,  views}
 export type VIEWS_BY_IDResult = {
   _id: string;
   views: number | null;
@@ -276,7 +276,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"project\" && defined(slug.current) && !defined($search) || title match $search || category match $search || author->name match $search ] | order(_createdAt desc){\n  _id, \n  title, \n  slug,\n  _rev,\n  _type,\n  _updatedAt,\n  _createdAt,\n  author -> {\n    _id, name, image, bio\n  }, \n  views,\n  description,\n  category,\n  image,\n}": PROJECT_QUERIESResult;
     "*[_type == \"project\" && _id == $id][0]{\n  _id, \n  title, \n  slug,\n  _createdAt,\n  author -> {\n    _id, name, image, bio,username,email\n  }, \n  views,\n  description,\n  category,\n  image,\n    pitch\n}": PROJECT_BY_ID_QUERYResult;
-    "*[_type == \"project\" && _id == $id][0]{\n  _id,views\n}": VIEWS_BY_IDResult;
+    "*[_type == \"project\" && _id == $id][0]{\n  _id,\n  views\n}": VIEWS_BY_IDResult;
     "\n  *[_type == \"author\" && id == $id][0]{\n    _id,\n    id,\n    name,\n    username,\n    email,\n    image,\n    bio\n  }\n  ": AUTHOR_BY_GITHUB_IDResult;
   }
 }
