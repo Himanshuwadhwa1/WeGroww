@@ -8,7 +8,6 @@ const nextConfig: NextConfig = {
   eslint:{
     ignoreDuringBuilds:true
   },
-  serverExternalPackages:["lucid-react/esm"],
   images:{
     dangerouslyAllowSVG : true,
     remotePatterns:[{
@@ -17,7 +16,7 @@ const nextConfig: NextConfig = {
     }]
   },
   experimental :{
-    ppr:'incremental',
+    ppr:'incremental'
   },
   devIndicators:{
     appIsrStatus:true,
