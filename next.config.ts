@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   eslint:{
     ignoreDuringBuilds:true
   },
-  serverExternalPackages:["lucid-react"],
+  serverExternalPackages:["lucid-react/esm"],
   images:{
     dangerouslyAllowSVG : true,
     remotePatterns:[{
