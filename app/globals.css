@@ -190,7 +190,7 @@
 
     /* view */
     .view-container {
-        @apply flex justify-start items-center mt-5 fixed bottom-3 right-3;
+        @apply flex justify-start items-center mt-5 fixed bottom-3 left-3;
     }
 
     .view-text {
