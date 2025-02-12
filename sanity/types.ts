@@ -331,9 +331,9 @@ export type PROJECT_BY_USER_QUERYResult = Array<{
   category: string | null;
   image: string | null;
 }>;
-// Variable: EDITOR_PICK_QUERY
+// Variable: PLAYLIST_SLUG_QUERY
 // Query: *[_type == "playlist" && slug.current == $slug][0]{  _id,    title,    slug,    select[]->{      _id,      _createdAt,      title,      slug,      image,      pitch,      category,      views,      description,      author->{        _id,        name,        slug,        image,        bio,      }    }}
-export type EDITOR_PICK_QUERYResult = {
+export type PLAYLIST_SLUG_QUERYResult = {
   _id: string;
   title: string | null;
   slug: Slug | null;
@@ -367,6 +367,6 @@ declare module "@sanity/client" {
     "\n  *[_type == \"author\" && id == $id][0]{\n    _id,\n    id,\n    name,\n    username,\n    email,\n    image,\n    bio\n  }\n  ": AUTHOR_BY_GITHUB_IDResult;
     "\n  *[_type == \"author\" && _id == $id][0]{\n    _id,\n    id,\n    name,\n    username,\n    email,\n    image,\n    bio\n  }\n  ": AUTHOR_BY_ID_QUERYResult;
     "*[_type == \"project\" && author._ref == $id] | order(_createdAt desc){\n    _id, \n    title, \n    slug,\n    _rev,\n    _type,\n    _updatedAt,\n    _createdAt,\n    author -> {\n      _id, name, image, bio\n    }, \n    views,\n    description,\n    category,\n    image,\n  }": PROJECT_BY_USER_QUERYResult;
-    "*[_type == \"playlist\" && slug.current == $slug][0]{\n  _id,\n    title,\n    slug,\n    select[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      image,\n      pitch,\n      category,\n      views,\n      description,\n      author->{\n        _id,\n        name,\n        slug,\n        image,\n        bio,\n      }\n    }\n}": EDITOR_PICK_QUERYResult;
+    "*[_type == \"playlist\" && slug.current == $slug][0]{\n  _id,\n    title,\n    slug,\n    select[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      image,\n      pitch,\n      category,\n      views,\n      description,\n      author->{\n        _id,\n        name,\n        slug,\n        image,\n        bio,\n      }\n    }\n}": PLAYLIST_SLUG_QUERYResult;
   }
 }
