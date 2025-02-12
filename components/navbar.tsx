@@ -1,4 +1,6 @@
 import { auth , signIn, signOut } from '@/auth';
+import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
+import { BadgePlus, LogOut } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
@@ -18,16 +20,24 @@ export async function Navbar (props: INavbarProps) {
             {session && session?.user ? (
                 <>
                     <Link href='/create'>
-                        <span>Create</span>
+                        <span className='max-sm:hidden'>Create</span>
+                        <BadgePlus className='size-6 sm:hidden'/>
                     </Link>
                     <form action={async()=>{
                         "use server"
                         await signOut({redirectTo:'/'});
                     }}>
-                        <button type='submit'>Sign out</button>
+                        <button type='submit'>
+                            <span className='max-sm:hidden'>Sign Out</span>
+                            <LogOut className='size-6 sm:hidden'/>
+                        </button>
                     </form>
                     <Link href={`/user/${session?.id}`}>
-                        {session?.user?.name}
+                        <span className='max-sm:hidden'>{session?.user.name}</span>
+                        <Avatar className='sm:hidden'>
+                            <AvatarImage src={session?.user?.image || ''} alt={session?.user.name || ''} className='size-10'/>
+                            <AvatarFallback>AV</AvatarFallback>
+                        </Avatar>
                     </Link>
                 </>
             ):(

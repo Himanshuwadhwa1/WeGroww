@@ -1,10 +1,12 @@
 import { auth } from '@/auth';
+import UserProjects from '@/components/userProject';
 import { client } from '@/sanity/lib/client';
 import {  AUTHOR_BY_ID_QUERY } from '@/sanity/lib/queries';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import * as React from 'react';
-
+import { Suspense } from 'react';
+import {SkeletonCard} from '@/components/ProjectCard'
 export interface IHomeProps {
     params:Promise<{id:string}>
 }
@@ -25,14 +27,16 @@ export default async function Home ({params}: IHomeProps) {
             <div className='profile_title'>
                 <h3 className='text-24-black uppercase text-center line-clamp-1'> {user.name}</h3>
             </div>
-            <Image src={user?.image} alt={user.name} width={220} height={220} className='profile_image'/>
+            <Image src={user?.image!} alt={user.name!} width={220} height={220} className='profile_image'/>
             <p className='text-25-extrabold mt-7 text-center'>@{user.username}</p>
             <p className='mt-1 text-center text-14-normal'>{user?.bio}</p>
         </div>
         <div className='flex flex-1 flex-col gap-5 lg:mt-5'>
             <p className='text-30-bold'>{session?.id == id ? 'Your ' : 'All '}Projects </p>
             <ul className='card_grid-sm'>
-                {/* TODO: LIST OF this user's projects*/}
+              <Suspense fallback={<SkeletonCard />}>
+                <UserProjects id={id} />
+              </Suspense>
             </ul>
         </div>
 

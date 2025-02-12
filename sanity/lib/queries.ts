@@ -59,3 +59,44 @@ export const AUTHOR_BY_ID_QUERY = defineQuery(`
     bio
   }
   `)
+
+  export const PROJECT_BY_USER_QUERY = defineQuery(`*[_type == "project" && author._ref == $id] | order(_createdAt desc){
+    _id, 
+    title, 
+    slug,
+    _rev,
+    _type,
+    _updatedAt,
+    _createdAt,
+    author -> {
+      _id, name, image, bio
+    }, 
+    views,
+    description,
+    category,
+    image,
+  }`)
+  
+  export const PLAYLIST_SLUG_QUERY = defineQuery(`*[_type == "playlist" && slug.current == $slug][0]{
+  _id,
+    title,
+    slug,
+    select[]->{
+      _id,
+      _createdAt,
+      title,
+      slug,
+      image,
+      pitch,
+      category,
+      views,
+      description,
+      author->{
+        _id,
+        name,
+        slug,
+        image,
+        bio,
+      }
+    }
+}`)

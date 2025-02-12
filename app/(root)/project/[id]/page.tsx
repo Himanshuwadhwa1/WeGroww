@@ -1,6 +1,6 @@
 import { formatDate } from '@/lib/utils';
 import { client } from '@/sanity/lib/client';
-import { PROJECT_BY_ID_QUERY } from '@/sanity/lib/queries';
+import { PLAYLIST_SLUG_QUERY, PROJECT_BY_ID_QUERY } from '@/sanity/lib/queries';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -9,6 +9,7 @@ import markdownit from 'markdown-it'
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { View } from '@/components/view';
+import { ProjectCard, ProjectTypeCard } from '@/components/ProjectCard';
 const md = markdownit()
 
 export interface IHomeProps {
@@ -17,7 +18,11 @@ export interface IHomeProps {
 export const experimental_ppr = true;
 export default async function Home({params}: IHomeProps) {
     const id = (await params).id;
-    const post = await client.fetch(PROJECT_BY_ID_QUERY,{id});
+    const [post,data] = await Promise.all([  // parallel data fetching for faster data fetching
+        client.fetch(PROJECT_BY_ID_QUERY,{id}),
+        client.fetch(PLAYLIST_SLUG_QUERY,{slug:'editor-s-pick'})
+    ])
+    const editorPosts = data?.select;
     if(!post){
         return notFound();
     }
@@ -58,7 +63,16 @@ export default async function Home({params}: IHomeProps) {
             )}
         </div>
             <hr  className='divider'/>
-            {/* TODO : editor selected projects*/}
+            {editorPosts && editorPosts?.length >0 && (
+                <div className='max-w-4xl mx-auto'>
+                    <p className='text-30-semibold'>Projects you may find interesting</p>
+                    <ul className='mt-7 card_grid-sm'>
+                        {editorPosts?.map((post:ProjectTypeCard,index:number)=>{
+                            return <ProjectCard key={index} post={post}/>
+                        })}
+                    </ul>
+                </div>
+            )}
             
             <Suspense fallback={<Skeleton className='view_skeleton' />}>
                 <View id={id}/>

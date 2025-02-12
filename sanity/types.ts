@@ -125,6 +125,23 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
+export type Playlist = {
+  _id: string;
+  _type: "playlist";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  select?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "project";
+  }>;
+};
+
 export type Project = {
   _id: string;
   _type: "project";
@@ -168,7 +185,7 @@ export type Author = {
 
 export type Markdown = string;
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | SanityAssetSourceData | Project | Slug | Author | Markdown;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | SanityAssetSourceData | Playlist | Project | Slug | Author | Markdown;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: sanity/lib/queries.ts
 // Variable: PROJECT_QUERIES
@@ -186,6 +203,19 @@ export type PROJECT_QUERIESResult = Array<{
   description: null;
   category: null;
   image: string | null;
+} | {
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  _rev: string;
+  _type: "playlist";
+  _updatedAt: string;
+  _createdAt: string;
+  author: null;
+  views: null;
+  description: null;
+  category: null;
+  image: null;
 } | {
   _id: string;
   title: string | null;
@@ -280,6 +310,52 @@ export type AUTHOR_BY_ID_QUERYResult = {
   image: string | null;
   bio: string | null;
 } | null;
+// Variable: PROJECT_BY_USER_QUERY
+// Query: *[_type == "project" && author._ref == $id] | order(_createdAt desc){    _id,     title,     slug,    _rev,    _type,    _updatedAt,    _createdAt,    author -> {      _id, name, image, bio    },     views,    description,    category,    image,  }
+export type PROJECT_BY_USER_QUERYResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  _rev: string;
+  _type: "project";
+  _updatedAt: string;
+  _createdAt: string;
+  author: {
+    _id: string;
+    name: string | null;
+    image: string | null;
+    bio: string | null;
+  } | null;
+  views: number | null;
+  description: string | null;
+  category: string | null;
+  image: string | null;
+}>;
+// Variable: EDITOR_PICK_QUERY
+// Query: *[_type == "playlist" && slug.current == $slug][0]{  _id,    title,    slug,    select[]->{      _id,      _createdAt,      title,      slug,      image,      pitch,      category,      views,      description,      author->{        _id,        name,        slug,        image,        bio,      }    }}
+export type EDITOR_PICK_QUERYResult = {
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  select: Array<{
+    _id: string;
+    _createdAt: string;
+    title: string | null;
+    slug: Slug | null;
+    image: string | null;
+    pitch: string | null;
+    category: string | null;
+    views: number | null;
+    description: string | null;
+    author: {
+      _id: string;
+      name: string | null;
+      slug: null;
+      image: string | null;
+      bio: string | null;
+    } | null;
+  }> | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -290,5 +366,7 @@ declare module "@sanity/client" {
     "*[_type == \"project\" && _id == $id][0]{\n  _id,\n  views\n}": VIEWS_BY_IDResult;
     "\n  *[_type == \"author\" && id == $id][0]{\n    _id,\n    id,\n    name,\n    username,\n    email,\n    image,\n    bio\n  }\n  ": AUTHOR_BY_GITHUB_IDResult;
     "\n  *[_type == \"author\" && _id == $id][0]{\n    _id,\n    id,\n    name,\n    username,\n    email,\n    image,\n    bio\n  }\n  ": AUTHOR_BY_ID_QUERYResult;
+    "*[_type == \"project\" && author._ref == $id] | order(_createdAt desc){\n    _id, \n    title, \n    slug,\n    _rev,\n    _type,\n    _updatedAt,\n    _createdAt,\n    author -> {\n      _id, name, image, bio\n    }, \n    views,\n    description,\n    category,\n    image,\n  }": PROJECT_BY_USER_QUERYResult;
+    "*[_type == \"playlist\" && slug.current == $slug][0]{\n  _id,\n    title,\n    slug,\n    select[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      image,\n      pitch,\n      category,\n      views,\n      description,\n      author->{\n        _id,\n        name,\n        slug,\n        image,\n        bio,\n      }\n    }\n}": EDITOR_PICK_QUERYResult;
   }
 }
