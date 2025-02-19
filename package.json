@@ -3,14 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "predev": "npm run typegen",
     "prebuild": "npm run typegen",
-    "typegen": "sanity schema extract --path=./sanity/extract.json --config=sanity.config.js && sanity typegen generate"
-
+    "typegen": "sanity schema extract --path=./sanity/extract.json && sanity typegen generate"
   },
   "packageManager": "npm@10.9.0",
   "overrides": {
@@ -29,7 +28,7 @@
     "@uiw/react-md-editor": "^4.0.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.474.0",
+    "lucide-react": "^0.452.0",
     "markdown-it": "^14.1.0",
     "next": "^15.2.0-canary.45",
     "next-auth": "^5.0.0-beta.25",
@@ -44,6 +43,7 @@
     "styled-components": "^6.1.15",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
+    "wegroww": "file:",
     "zod": "^3.24.1"
   },
   "devDependencies": {
