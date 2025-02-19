@@ -6,7 +6,7 @@ import { auth } from "@/auth";
 interface iQueryprops{
   searchParams: Promise<{ search?:string }>
 }
-export const revalidate = 60;
+export const revalidate = 0;
 export default async function Home({searchParams} : iQueryprops ) {
   const search = (await searchParams).search;
   const params = {search : search || null}
